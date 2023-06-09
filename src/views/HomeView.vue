@@ -8,7 +8,9 @@
         <el-aside width="200px">
           <my-system-aside></my-system-aside>
         </el-aside>
-        <el-main>Main</el-main>
+        <el-main>
+          <router-view />
+        </el-main>
       </el-container>
     </el-container>
   </div>
@@ -54,5 +56,9 @@ export default defineComponent({
 
 .el-aside {
   height: 100%;
+}
+
+.el-main {
+  padding: 0;
 }
 </style>

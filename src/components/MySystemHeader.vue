@@ -71,10 +71,10 @@ export default defineComponent({
       background-color: var(--item-selected-color);
       position: absolute;
       bottom: 0;
+      transition: height 0.2s;
     }
     li:hover:after {
       height: 2px;
-      transition: height 0.2s;
     }
   }
 }

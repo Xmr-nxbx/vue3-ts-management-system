@@ -11,6 +11,28 @@ const routes: Array<RouteRecordRaw> = [
     path: '/home',
     name: 'home',
     component: () => import('../views/HomeView.vue'),
+    children: [
+      {
+        path: 'goods',
+        name: 'goods',
+        meta: {
+          // 路由时控制是否展示
+          isShow: true,
+          title: "商品列表"
+        },
+        component: () => import('../components/HomeViewComponents/GoodsView.vue')
+      },
+      {
+        path: 'users',
+        name: 'users',
+        meta: {
+          // 路由时控制是否展示
+          isShow: true,
+          title: "用户列表"
+        },
+        component: () => import('../components/HomeViewComponents/UsersView.vue')
+      }
+    ]
   }, {
     path: '/about',
     name: 'about',

@@ -1,37 +1,30 @@
 <template>
   <el-menu
     class="el-menu-vertical-demo"
-    default-active="1"
-    @open="handleOpen"
-    @close="handleClose"
+    :default-active="defaultActiveRoute"
+    router
   >
-    <el-menu-item index="1">
-      <el-icon><icon-menu /></el-icon>
-      <span>商品列表</span>
-    </el-menu-item>
-    <el-menu-item index="2">
-      <el-icon><document /></el-icon>
-      <span>Two</span>
-    </el-menu-item>
-    <el-menu-item index="3">
-      <el-icon><setting /></el-icon>
-      <span>Three</span>
-    </el-menu-item>
+    <template v-for="route in allowRoutes" :key="route.path">
+      <el-menu-item :index="route.path">
+        <span>{{ route.meta.title }}</span>
+      </el-menu-item>
+    </template>
   </el-menu>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
-    const handleOpen = () => {
-      123;
-    };
-    const handleClose = () => {
-      456;
-    };
-    return { handleOpen, handleClose };
+    const router = useRouter();
+    const allowRoutes = router.getRoutes().filter((route) => {
+      return route.meta.isShow;
+    });
+    let defaultActiveRoute = allowRoutes.length ? allowRoutes[0].path : "";
+
+    return { allowRoutes, defaultActiveRoute };
   },
 });
 </script>
