@@ -10,17 +10,25 @@
       <li></li>
       <li><a href="#"></a></li>
       <li><a href="#">个人信息</a></li>
-      <li><a href="#">退出登录</a></li>
+      <li><a href="#" @click="delTokenAndLogout">退出登录</a></li>
     </ul>
   </nav>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   setup() {
-    return {};
+    const router = useRouter();
+
+    // 退出登录
+    const delTokenAndLogout = () => {
+      localStorage.removeItem("token");
+      router.push({ name: "login" });
+    };
+    return { delTokenAndLogout };
   },
 });
 </script>

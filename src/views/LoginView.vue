@@ -17,6 +17,7 @@
           v-model="ruleForm.password"
           type="password"
           autocomplete="off"
+          @keyup.enter="submitForm(ruleFormRef)"
         />
       </el-form-item>
 
@@ -66,7 +67,7 @@ export default defineComponent({
     };
 
     const ruleFormRef = ref<FormInstance>();
-    console.log(ruleFormRef);
+    // console.log(ruleFormRef);
 
     // 登录
     // Vue2 $router => Vue3 useRouter
@@ -81,12 +82,12 @@ export default defineComponent({
             (res) => {
               console.log("请求成功", res);
               // 保存token
-              localStorage.setItem("token", res.token);
+              localStorage.setItem("token", res.data.token);
               // 路由跳转
               router.push("/home");
             },
             (err) => {
-              ElMessage.error("登录失败，请检查您的账号和密码");
+              ElMessage.error(err.data.msg);
               console.log("请求失败", err);
             }
           );
@@ -101,7 +102,13 @@ export default defineComponent({
       data.ruleForm.username = "";
       data.ruleForm.password = "";
     };
-    return { ...toRefs(data), rules, ruleFormRef, submitForm, resetForm };
+    return {
+      ...toRefs(data),
+      rules,
+      ruleFormRef,
+      submitForm,
+      resetForm,
+    };
   },
 });
 </script>

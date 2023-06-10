@@ -10,6 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   }, {
     path: '/home',
     name: 'home',
+    redirect: '/home/goods',
     component: () => import('../views/HomeView.vue'),
     children: [
       {
@@ -49,7 +50,18 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes
+  routes,
+})
+
+router.beforeEach((to, from, next) => {
+  const token: string | null = localStorage.getItem("token") || null;
+  // token 不存在或者路径不是login
+  if (token === null && to.name != "login") {
+    next({ name: "login" })
+  } else {
+    // token 存在，放行
+    next();
+  }
 })
 
 export default router

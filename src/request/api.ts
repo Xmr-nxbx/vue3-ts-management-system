@@ -1,11 +1,13 @@
 import service from ".";
 
-import { loginDataInterface, loginResponseInterface } from "@/type/login";
+import { loginDataInterface } from "@/type/login";
 
-export function login(data: loginDataInterface): Promise<loginResponseInterface> {
+// 登录接口
+export function login(data: loginDataInterface) {
     return service.post("/login", data);
 }
 
-export function getGoodsList(data: any): Promise<any> {
-    return service.get("/getGoodsList", data);
+// 商品列表
+export function getGoodsList() {
+    return service.get("/getGoodsList");
 }

@@ -60,5 +60,6 @@ export default defineComponent({
 
 .el-main {
   padding: 0;
+  padding-left: 10px;
 }
 </style>

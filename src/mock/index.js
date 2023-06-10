@@ -15,8 +15,10 @@ Mock.mock('/api/login', 'post', function (options) {
     }
     const response = {
         code: userIndex != -1 ? 200 : 401,
-        msg: userIndex != -1 ? "登录成功" : "登录失败",
-        token: userIndex != -1 ? loginData.users[userIndex]["cookie"] : "",
+        data: {
+            msg: userIndex != -1 ? "登录成功" : "登录失败，请检查您的账号和密码",
+            token: userIndex != -1 ? loginData.users[userIndex]["cookie"] : "",
+        }
     }
     return response;
 });
@@ -24,13 +26,12 @@ Mock.mock('/api/login', 'post', function (options) {
 
 // 商品
 const goodsData = Mock.mock({
-    "goodsList|1-20": [
-        { "id|+1": 1, "title": "@ctitle", "introduction": "@cparagraph" },
+    "goodsList|20-50": [
+        { "id|+1": 1, "title": "@ctitle", "introduce": "@cparagraph" },
     ]
 })
 
-Mock.mock('/api/getGoodsList', 'get', function (options) {
-    console.log(options);
+Mock.mock('/api/getGoodsList', 'get', function () {
     const response = {
         code: 200,
         data: goodsData
