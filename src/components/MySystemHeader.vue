@@ -7,8 +7,8 @@
           后台管理系统
         </a>
       </li>
-      <li></li>
-      <li><a href="#"></a></li>
+      <!-- <li></li>
+      <li><a href="#"></a></li> -->
       <li><a href="#">个人信息</a></li>
       <li><a href="#" @click="delTokenAndLogout">退出登录</a></li>
     </ul>
@@ -70,6 +70,9 @@ export default defineComponent({
       .title {
         font-size: 25px;
       }
+    }
+    li:first-child {
+      margin-right: 400px;
     }
     li:after {
       content: "";

@@ -44,15 +44,22 @@ import {
 } from "vue";
 import { getGoodsList } from "@/request/api";
 import { GoodsInitData, GoodsListInterface } from "@/type/goods";
+import { ElMessage } from "element-plus";
 
 export default defineComponent({
   setup() {
     const data = reactive(new GoodsInitData());
     onMounted(() => {
-      getGoodsList().then((res) => {
-        data.list = res.data.goodsList || [];
-        data.listForShow = data.list;
-      });
+      getGoodsList().then(
+        (res) => {
+          data.list = res.data.goodsList || [];
+          data.listForShow = data.list;
+        },
+        (err) => {
+          ElMessage.error(err.data.msg);
+          console.log("请求失败", err);
+        }
+      );
     });
 
     const dataList = reactive({
